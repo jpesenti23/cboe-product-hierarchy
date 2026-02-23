@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equities NA — Product Hierarchy Audit</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f7fa;
+    color: #1a1a2e;
+    padding: 24px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 32px 40px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; opacity: 0.8; }
+  .stats {
+    display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 12px 20px;
+    min-width: 120px;
+  }
+  .stat-card .number { font-size: 28px; font-weight: 700; }
+  .stat-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.75; }
+  .controls {
+    display: flex; gap: 10px; margin-bottom: 20px; align-items: center; flex-wrap: wrap;
+  }
+  .btn {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: #e8edf3; border-color: #9ca3af; }
+  .search-box {
+    padding: 8px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 13px;
+    width: 260px;
+    outline: none;
+  }
+  .search-box:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+  .tree { margin-top: 8px; }
+  .tree-node { margin-left: 0; }
+  .tree-node .children { margin-left: 28px; border-left: 2px solid #e5e7eb; padding-left: 0; }
+  .node-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.1s;
+    user-select: none;
+    gap: 8px;
+  }
+  .node-row:hover { background: #e8edf3; }
+  .node-row.highlight { background: #fef3c7; }
+  .toggle {
+    width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #6b7280;
+    transition: transform 0.15s;
+    flex-shrink: 0;
+  }
+  .toggle.expanded { transform: rotate(90deg); }
+  .toggle.leaf { visibility: hidden; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .level-0 .badge { background: #1a1a2e; color: white; }
+  .level-1 .badge { background: #3b82f6; color: white; }
+  .level-2 .badge { background: #10b981; color: white; }
+  .level-3 .badge { background: #f59e0b; color: white; }
+  .level-4 .badge { background: #ef4444; color: white; }
+  .level-5 .badge { background: #8b5cf6; color: white; }
+  .node-label { font-size: 14px; font-weight: 500; }
+  .child-count { font-size: 11px; color: #9ca3af; margin-left: 4px; }
+  .legend {
+    display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
+    font-size: 12px; color: #6b7280;
+  }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .footer {
+    margin-top: 32px; padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 12px; color: #9ca3af; text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Equities NA &mdash; Product Hierarchy</h1>
+  <div class="subtitle">Salesforce Dependent Picklist Matrix &bull; Extracted February 23, 2026</div>
+  <div class="stats">
+    <div class="stat-card"><div class="number">19</div><div class="label">Product Families</div></div>
+    <div class="stat-card"><div class="number">13</div><div class="label">Subset 1 Values</div></div>
+    <div class="stat-card"><div class="number">2</div><div class="label">Subset 2 Values</div></div>
+    <div class="stat-card"><div class="number">28</div><div class="label">Total Paths</div></div>
+  </div>
+</div>
+<div class="legend">
+  <span style="font-weight:600;">Levels:</span>
+  <div class="legend-item"><div class="legend-dot" style="background:#1a1a2e;"></div> Business Line</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div> Product Family</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div> Subset 1</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div> Subset 2</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div> Subset 3</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6;"></div> Subset 4</div>
+</div>
+<div class="controls">
+  <button class="btn" onclick="expandAll()">Expand All</button>
+  <button class="btn" onclick="collapseAll()">Collapse All</button>
+  <input type="text" class="search-box" placeholder="Search values..." oninput="searchTree(this.value)">
+</div>
+<div class="tree" id="tree"></div>
+<div class="footer">Source: Salesforce Production (Opportunity dependent picklist metadata) &bull; Business Line: Equities NA</div>
+<script>
+const hierarchy = {"CAD: Cboe BIDS Canada": {"Buyside": {}, "Conditionals": {"WTT Active": {}, "WTT Passive": {}}, "Sponsoring Broker": {}}, "CAD: MATCHNow": {}, "CAD: Neo": {"NEO-D": {}, "NEO-L": {}, "NEO-N": {}}, "CMC": {}, "Connectivity": {}, "Early Market Hours": {}, "Membership": {}, "Periodic Auction": {}, "Product Consultation / Feedback": {"LIS Dark Book": {}, "Quant Client Engagement": {}}, "QDP": {}, "Retail_Priority": {}, "Sponsored Access": {"Direct Sponsored Access": {}, "Sponsored Client": {}, "Sponsored DMA": {}}, "Dedicated Cores": {}, "RPI": {"Retail Remover": {}, "RPI Adder": {}}, "Corporate IPO": {}, "Timestamping Service": {}, "EDGA Maker/Taker": {}, "EDGX RPI": {}, "BOEv3": {}};
+const levelNames = ['Business Line', 'Product Family', 'Subset 1', 'Subset 2', 'Subset 3', 'Subset 4'];
+
+function buildNode(name, children, level) {
+  const div = document.createElement('div');
+  div.className = 'tree-node';
+  const isObj = children && typeof children === 'object' && !Array.isArray(children);
+  const isArr = Array.isArray(children);
+  const hasChildren = (isObj && Object.keys(children).length > 0) || (isArr && children.length > 0);
+  const row = document.createElement('div');
+  row.className = 'node-row level-' + level;
+  const toggle = document.createElement('span');
+  toggle.className = 'toggle' + (hasChildren ? '' : ' leaf');
+  toggle.textContent = '\u25B6';
+  const badge = document.createElement('span');
+  badge.className = 'badge';
+  badge.textContent = levelNames[level] || 'L' + level;
+  const label = document.createElement('span');
+  label.className = 'node-label';
+  label.textContent = name;
+  row.appendChild(toggle);
+  row.appendChild(badge);
+  row.appendChild(label);
+  if (hasChildren) {
+    const childCount = document.createElement('span');
+    childCount.className = 'child-count';
+    const cnt = isArr ? children.length : Object.keys(children).length;
+    childCount.textContent = '(' + cnt + ')';
+    row.appendChild(childCount);
+  }
+  div.appendChild(row);
+  if (hasChildren) {
+    const childContainer = document.createElement('div');
+    childContainer.className = 'children';
+    childContainer.style.display = 'none';
+    if (isArr) {
+      children.forEach(function(child) { childContainer.appendChild(buildNode(child, null, level + 1)); });
+    } else {
+      Object.keys(children).sort().forEach(function(key) { childContainer.appendChild(buildNode(key, children[key], level + 1)); });
+    }
+    div.appendChild(childContainer);
+    row.addEventListener('click', function() {
+      var isOpen = childContainer.style.display !== 'none';
+      childContainer.style.display = isOpen ? 'none' : 'block';
+      toggle.classList.toggle('expanded', !isOpen);
+    });
+  }
+  return div;
+}
+
+function renderTree() {
+  var tree = document.getElementById('tree');
+  tree.innerHTML = '';
+  var root = buildNode('Equities NA', hierarchy, 0);
+  tree.appendChild(root);
+  var firstChildren = root.querySelector('.children');
+  if (firstChildren) { firstChildren.style.display = 'block'; root.querySelector('.toggle').classList.add('expanded'); }
+}
+
+function expandAll() {
+  document.querySelectorAll('.children').forEach(function(el) { el.style.display = 'block'; });
+  document.querySelectorAll('.toggle:not(.leaf)').forEach(function(el) { el.classList.add('expanded'); });
+}
+
+function collapseAll() {
+  document.querySelectorAll('.children').forEach(function(el) { el.style.display = 'none'; });
+  var root = document.querySelector('#tree > .tree-node > .children');
+  if (root) { root.style.display = 'block'; document.querySelector('#tree > .tree-node > .toggle').classList.add('expanded'); }
+}
+
+function searchTree(query) {
+  var q = query.toLowerCase().trim();
+  document.querySelectorAll('.node-row').forEach(function(row) { row.classList.remove('highlight'); });
+  if (!q) return;
+  document.querySelectorAll('.node-label').forEach(function(label) {
+    if (label.textContent.toLowerCase().includes(q)) {
+      var row = label.closest('.node-row');
+      row.classList.add('highlight');
+      var parent = row.parentElement;
+      while (parent) {
+        if (parent.classList && parent.classList.contains('children')) {
+          parent.style.display = 'block';
+          var prev = parent.previousElementSibling;
+          if (prev) { var t = prev.querySelector('.toggle'); if (t) t.classList.add('expanded'); }
+        }
+        parent = parent.parentElement;
+      }
+    }
+  });
+}
+
+renderTree();
+</script>
+</body>
+</html>
