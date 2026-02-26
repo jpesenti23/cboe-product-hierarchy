@@ -166,6 +166,134 @@
     text-align: center; padding: 40px; color: #9ca3af;
     font-size: 14px;
   }
+
+  /* Edit Mode */
+  body.edit-mode .header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); }
+  .edit-toggle {
+    padding: 8px 16px; border: 2px solid #3b82f6; border-radius: 6px;
+    background: white; cursor: pointer; font-size: 13px; font-weight: 600;
+    color: #3b82f6; transition: all 0.15s; margin-left: auto;
+  }
+  .edit-toggle:hover { background: #eff6ff; }
+  .edit-toggle.active { background: #3b82f6; color: white; }
+  .edit-actions { display: none; }
+  body.edit-mode .edit-actions { display: inline-flex; gap: 4px; margin-left: 6px; }
+  .edit-btn {
+    width: 24px; height: 24px; border: 1px solid #d1d5db; border-radius: 4px;
+    background: white; cursor: pointer; font-size: 12px; display: inline-flex;
+    align-items: center; justify-content: center; transition: all 0.1s; padding: 0;
+    flex-shrink: 0; color: #6b7280;
+  }
+  .edit-btn:hover { background: #f3f4f6; }
+  .edit-btn.add:hover { background: #ecfdf5; color: #059669; border-color: #059669; }
+  .edit-btn.remove:hover { background: #fef2f2; color: #dc2626; border-color: #dc2626; }
+  .edit-btn.rename:hover { background: #eff6ff; color: #2563eb; border-color: #2563eb; }
+  .edit-btn.move:hover { background: #fefce8; color: #ca8a04; border-color: #ca8a04; }
+  .edit-btn.paste { background: #fefce8; color: #ca8a04; border: 1px solid #ca8a04; font-size: 10px; width: auto; padding: 0 8px; }
+  .edit-btn.paste:hover { background: #fef08a; }
+  .inline-input {
+    padding: 2px 6px; border: 2px solid #3b82f6; border-radius: 4px;
+    font-size: 13px; outline: none; font-family: inherit; width: 200px;
+  }
+  .inline-input-actions { display: inline-flex; gap: 2px; margin-left: 4px; }
+  .inline-input-actions button {
+    padding: 2px 8px; border: 1px solid #d1d5db; border-radius: 4px;
+    background: white; cursor: pointer; font-size: 11px;
+  }
+  .inline-input-actions .confirm { background: #059669; color: white; border-color: #059669; }
+  .inline-input-actions .cancel { background: #f3f4f6; }
+
+  /* Change Summary */
+  .change-summary {
+    display: none; background: #fefce8; border: 1px solid #fde68a; border-radius: 8px;
+    padding: 12px 20px; margin-bottom: 16px; font-size: 13px;
+    align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .change-summary.visible { display: flex; }
+  .change-summary .changes-text { flex: 1; color: #92400e; }
+  .change-summary .changes-text strong { color: #78350f; }
+  .change-summary button {
+    padding: 6px 14px; border: 1px solid #d97706; border-radius: 6px;
+    background: white; cursor: pointer; font-size: 12px; font-weight: 500; color: #92400e;
+  }
+  .change-summary button:hover { background: #fef3c7; }
+  .change-summary button.reset { border-color: #dc2626; color: #dc2626; }
+  .change-summary button.reset:hover { background: #fef2f2; }
+
+  /* Move Mode Banner */
+  .move-banner {
+    display: none; background: #fef08a; border: 2px solid #eab308; border-radius: 8px;
+    padding: 10px 20px; margin-bottom: 16px; font-size: 13px; font-weight: 500;
+    align-items: center; gap: 12px; color: #713f12;
+  }
+  .move-banner.visible { display: flex; }
+  .move-banner button {
+    padding: 4px 12px; border: 1px solid #ca8a04; border-radius: 4px;
+    background: white; cursor: pointer; font-size: 12px; color: #713f12;
+  }
+  .node-row.move-source { background: #fef9c3; outline: 2px solid #eab308; outline-offset: -2px; }
+  .node-row.move-target { outline: 2px dashed #059669; outline-offset: -2px; }
+
+  /* Tab edit buttons */
+  .tab-edit-actions { display: none; margin-left: 6px; }
+  body.edit-mode .tab-edit-actions { display: inline-flex; gap: 2px; }
+  .tab-edit-btn {
+    width: 18px; height: 18px; border: none; border-radius: 3px;
+    background: transparent; cursor: pointer; font-size: 10px; color: inherit;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0;
+    opacity: 0.6;
+  }
+  .tab-edit-btn:hover { opacity: 1; background: rgba(0,0,0,0.1); }
+  .tab.active .tab-edit-btn:hover { background: rgba(255,255,255,0.2); }
+  .add-bl-tab {
+    padding: 8px 16px; border: 2px dashed #d1d5db; border-radius: 8px;
+    background: transparent; cursor: pointer; font-size: 13px; font-weight: 500;
+    color: #9ca3af; display: none; transition: all 0.15s;
+  }
+  body.edit-mode .add-bl-tab { display: block; }
+  .add-bl-tab:hover { border-color: #3b82f6; color: #3b82f6; background: #eff6ff; }
+
+  /* Export Modal */
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
+  }
+  .modal-overlay.visible { display: flex; }
+  .modal {
+    background: white; border-radius: 12px; padding: 24px; max-width: 800px;
+    width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h2 { font-size: 20px; margin-bottom: 16px; color: #1a1a2e; }
+  .modal .field-export {
+    border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+  }
+  .modal .field-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px; background: #f9fafb; cursor: pointer; font-weight: 600; font-size: 13px;
+  }
+  .modal .field-header:hover { background: #f3f4f6; }
+  .modal .field-body { display: none; }
+  .modal .field-body.open { display: block; }
+  .modal pre {
+    background: #1e293b; color: #e2e8f0; padding: 16px; font-size: 11px;
+    overflow-x: auto; max-height: 300px; line-height: 1.5; margin: 0;
+  }
+  .modal .btn-row { display: flex; gap: 8px; padding: 8px 16px 12px; }
+  .modal .btn-row button {
+    padding: 6px 14px; border: 1px solid #d1d5db; border-radius: 6px;
+    background: white; cursor: pointer; font-size: 12px; font-weight: 500;
+  }
+  .modal .btn-row button:hover { background: #f3f4f6; }
+  .modal .btn-row .download-btn { background: #1a1a2e; color: white; border-color: #1a1a2e; }
+  .modal .btn-row .download-btn:hover { background: #2d3748; }
+  .modal .close-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+  .export-btn {
+    padding: 8px 16px; border: 2px solid #059669; border-radius: 6px;
+    background: white; cursor: pointer; font-size: 13px; font-weight: 600;
+    color: #059669; transition: all 0.15s; display: none;
+  }
+  body.edit-mode .export-btn { display: inline-block; }
+  .export-btn:hover { background: #ecfdf5; }
 </style>
 </head>
 <body>
@@ -193,29 +321,467 @@
   <button class="btn" onclick="expandAll()">Expand All</button>
   <button class="btn" onclick="collapseAll()">Collapse All</button>
   <input type="text" class="search-box" id="searchBox" placeholder="Search values..." oninput="searchTree(this.value)">
+  <button class="export-btn" onclick="showExportModal()">Export XML</button>
+  <button class="edit-toggle" id="editToggle" onclick="toggleEditMode()">Edit Mode</button>
+</div>
+
+<div class="change-summary" id="changeSummary">
+  <span class="changes-text" id="changesText"></span>
+  <button onclick="undoLast()">Undo Last</button>
+  <button class="reset" onclick="resetAll()">Reset All</button>
+</div>
+
+<div class="move-banner" id="moveBanner">
+  <span id="moveBannerText">Select target parent for '...'</span>
+  <button onclick="cancelMove()">Cancel</button>
 </div>
 
 <div class="tree-container" id="treeContainer"></div>
 
 <div class="footer">Source: Salesforce Production (Opportunity dependent picklist metadata) &bull; All Business Lines</div>
 
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <h2>Export Salesforce Metadata XML</h2>
+    <p style="font-size:13px;color:#6b7280;margin-bottom:16px;">Each file below is a <code>CustomField</code> metadata XML file. Place them in <code>force-app/main/default/objects/Opportunity/fields/</code> and deploy with <code>sf project deploy start</code>.</p>
+    <div id="exportFields"></div>
+    <div class="close-row">
+      <button class="btn" onclick="closeExportModal()">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
+var EDIT_MODE = false;
+var ORIGINAL_DATA = null;
+var ORIGINAL_BL_ORDER = null;
+var undoStack = [];
+var UNDO_CAP = 50;
+var moveState = null; // {sourcePath, sourceName, sourceLevel}
+var changeCount = {adds: 0, removes: 0, renames: 0, moves: 0};
+
 var ALL_DATA = {"Global Derivatives": {"iBoxx": {"Credit VIX": {}, "iBoxx Futures": {"IBHY": {}, "IBIG": {}, "IBHY + IBIG": {}, "iBoxx Options": {}, "IEMD": {}}}, "MSCI": {"MSCI Options": {"MSCI-MXEF": {}, "MSCI-MXEA": {}, "MSCI-ACWI": {}, "MSCI-VXMXEF": {}, "MSCI-VXMXEA": {}, "MSCI-MXUSA": {}, "MSCI-MXWLD": {}}}, "Multi List": {"Multi List Options": {"BZX": {"Flex": []}, "C1": {"Flex": []}, "C2": {"Flex": []}, "EDGX": {"Flex": []}}}, "New Product": {"\u20ac corps": {}, "Binary Options (SEC-regulated)": {}, "Bitcoin ETF Index Options": {}, "Continuous Digital Futures": {}, "Crypto": {}, "Dispersion(S&P)": {}, "Event Contracts/Prediction Markets": {}, "FTSE Bitcoin Futures": {}, "iBoxx Duration Hedged": {}, "Implied Move Index": {}, "Intraday Expiration Options": {}, "MAG 10 Options": {}, "Metaurus Futures": {}, "MSCI Inflation Derivatives": {}, "MVZ Options": {}, "Options On Futures": {}, "Quoted Spread Book": {}, "Risk Based Haircut - iBoxx Futures": {}, "RUT Options-Based Indices": {}, "RUT Variance Futures": {}, "RUT Volatility Futures (RVX)": {}, "S&P Sector Options(Redesign)": {}, "Single Stock Futures": {}, "SPW (SP500 Equal Weight)": {}, "UST VIX": {}}, "RUT": {"RUT Options": {"RUT": {"Flex": []}, "MRUT": {"Flex": []}}}, "SPX": {"SPESG": {}, "SPX Options": {"Nanos": {"Flex": []}, "SPX": {"Flex": [], "LEAPS": [], "GTH": []}, "XSP": {"Flex": [], "GTH": []}, "Sectors": {"Flex": []}}, "SPXW": {}, "Variance Futures": {}}, "VIX": {"VIX1D Index": {}, "VIX Futures": {"VIX": {"Flex": [], "GTH": []}, "VXM": {}}, "VIX OOF": {}, "VIX Options": {"VIX": {"Flex": [], "GTH": []}}}, "EU Derivatives": {"EU ETF Options": {}, "EU Flex Options": {}, "EU Index Futures": {}, "EU Index Options": {}, "EU SSO": {}}}, "Equities AU": {"AU Lit Book": {"ALPS": {"New Maker Flow": {"A-LPS Calibration": []}, "New Onboard": {"Retail Flow Incentive": []}}, "GTC": {}, "New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Onboard": {}, "New Taker Flow": {}, "Order Type": {"Post-Only": {}, "OCS - TEO": {}}, "Select": {"New Onboard (Taker)": {}, "New Onboard (Maker)": {}}}, "AU Dark Book": {"New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Onboard": {}, "New Taker Flow": {}, "Order Type": {"Post-Only": {}, "OCS - TEO": {}}}, "Cboe BIDS": {"Cboe BIDS AU": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}, "Cboe BIDS NL": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}, "Cboe BIDS UK": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}, "Cboe BIDS NL + Cboe BIDS UK": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}}, "Connectivity - Logical": {"BOE Trading Login": {}, "Drop Copy": {"Full": {}, "Full+Kill switch": {}, "Execution only": {}, "Kill switch only": {}}, "FIX Trading Login": {}, "Market Data (ASCII or Binary)": {}, "Market Data - Binary": {}, "Market Data - Binary Re-transmission": {}, "Market Data - Binary Snapshot": {}, "Market Data Snapshot (ASCII or Binary)": {}, "Purge Port": {}, "Trade Feed": {}, "Trading Login": {"FIX": {}, "CHIXOE": {}, "CHIXOE Dedicated servers w/ failover": {}}}, "Connectivity - Physical": {"10Gb Fibre Port": {}, "1Gb Fibre Port": {}, "Colocation": {"Full rack": {}, "Hosting service": {}, "Remote hands": {}}, "Copper Port": {}, "Cross Connect": {}, "CXA Connect": {}, "Risk control (HRC)": {}, "SOR": {}, "VPN Connection": {}}, "ETFs": {"CLP / Market Maker": {}, "ETF Issuer": {"EU ETF Listing": {"Crypto Listing": [], "ETF": [], "ETN": []}}, "New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Taker Flow": {}, "New trading flow / desk": {}}, "Membership": {}, "Open/Close": {"New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Onboard": {}, "New Taker Flow": {}}, "Product Consultation / Feedback": {"LIS Dark Book": {}, "Quant Client Engagement": {}}, "Trade Reporting": {"Blocks": {}, "ETFs": {"New Listing": {}, "Listing Transfer": {}, "Transfer": {}}, "NBBOX": {}, "Out of Hours": {}, "Portfolios": {}}, "Warrants": {"New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Taker Flow": {}}, "Lit Book - ALPS": {}, "Dedicated Cores": {}}, "Equities EU": {"BXTR": {"APA": {"Berne Solution": {}, "Buy Side Assisted Trade Reporting": {}, "Buy Side Trade Reporting": {}, "ETF Trade Reporting": {}, "Third Party vendor/APA": {"Advisory & Brokerage- ETF Licence": [], "Advisory & Brokerage \u2013 White Label": [], "Advisory and Brokerage Licence": ["1 Year", "3 Year", "5 Year"], "Advisory and Brokerage Light Licence": ["1 Year", "3 Year", "5 Year"], "Advisory and Brokerage- Structured Products": [], "Benchmark Licence": ["1 Year", "3 Year", "5 Year"], "Media Licence": ["1 Year", "3 Year", "5 Year"], "Non Display licence": ["1 Year", "3 Year", "5 Year"]}, "Vanilla TDM": {}, "ESMA APA Reg Fee Notification": {}}, "ETR": {"3rd Party Broker": {}, "Italian crosses": {}, "Multi Party Alleged": {}, "Multi Party Matched": {}, "Single Party": {"1 Market Subscription": [], "All Markets Subscription": [], "Bps rate": []}, "Spanish Put Through": {}}, "MTF Dark Book": {}, "On-Exchange Quoting (Qs)": {}, "SI_Quoting": {}}, "Cboe Closing Cross (3C)": {"New Flow": {}, "New Onboard": {}}, "Cboe BIDS": {"Cboe BIDS AU": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}, "Cboe BIDS NL": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}, "Cboe BIDS UK": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}, "Cboe BIDS NL + Cboe BIDS UK": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}, "Buy Side Directed IOIs": {"New Onboard": []}, "BIDS VWAP Sell Side Participant": {}}}, "CSDR": {}, "Dark Book": {"BXE + CXE + DXE Dark": {"New Flow": {}, "New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "BXE + CXE Dark": {"New Flow": {}, "New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "BXE Dark": {"New Flow": {}, "New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "CXE Dark": {"New Flow": {}, "New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "DXE Dark": {"New Flow": {}, "New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "Kai-X/BIDS": {"Buy Side GUI": {"Additional Traders": [], "New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side API": {"New Flow": [], "New Onboard": [], "Scorecard Review": []}, "Sell Side Designated Broker": {"New Onboard": []}, "Sell Side Directed IOIs": {"New Onboard": []}}, "Match": {"New Onboard": {"Retail Flow Incentive": []}}, "New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Onboard": {}, "New Taker Flow": {}, "Order Type": {"Post-Only": {}, "OCS - TEO": {}}}, "Depositary Receipts": {"DR Issuer": {}, "New trading flow / desk": {}}, "ETFs": {"CLP / Market Maker": {}, "ETF Issuer": {"EU ETF Listing": {"Crypto Listing": [], "ETF": [], "ETN": []}}, "New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Taker Flow": {}, "New trading flow / desk": {}}, "Lit Book": {"Alpha": {"New Maker & Taker Flow": {"Retail Liquidity Provider": [], "Retail Liquidity Taker": []}, "New Maker Flow": {"A-LPS Calibration": []}, "New Onboard": {"Retail Flow Incentive": []}}, "BXE Lit": {"New Maker & Taker Flow": {"Retail Liquidity Provider": [], "Retail Liquidity Taker": []}, "New Maker Flow": {"A-LPS Calibration": []}, "New Onboard": {"Retail Flow Incentive": []}, "New Taker Flow": {}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "CXE + DXE Lit": {"New Maker & Taker Flow": {"Retail Liquidity Provider": [], "Retail Liquidity Taker": []}, "New Maker Flow": {"A-LPS Calibration": []}, "New Onboard": {"Retail Flow Incentive": []}, "New Taker Flow": {}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}, "EMS Campaign": {}}, "CXE Lit": {"New Maker & Taker Flow": {"Retail Liquidity Provider": [], "Retail Liquidity Taker": []}, "New Maker Flow": {"A-LPS Calibration": []}, "New Onboard": {"Retail Flow Incentive": []}, "New Taker Flow": {}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}, "EMS Campaign": {}}, "DXE Lit": {"New Maker & Taker Flow": {"Retail Liquidity Provider": [], "Retail Liquidity Taker": []}, "New Maker Flow": {"A-LPS Calibration": []}, "New Onboard": {"Retail Flow Incentive": []}, "New Taker Flow": {}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}, "EMS Campaign": {}}, "New Maker & Taker Flow": {}, "New Maker Flow": {}, "New Onboard": {}, "New Taker Flow": {}, "Order Type": {"Post-Only": {}, "OCS - TEO": {}}, "Select": {"New Onboard (Taker)": {}, "New Onboard (Maker)": {}}}, "Membership": {}, "New Market": {"Depositary Receipts": {"New Listing": {}, "Transfer": {}}, "Vienna": {}, "Warsaw": {}}, "Periodic Auction Book": {"BXE + DXE Periodic Book": {"New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "BXE Periodic Book": {"New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}, "DXE Periodic Book": {"New Onboard": {"Retail Flow Incentive": []}, "Order Type": {"Dark PAB Sweep": [], "Dark Sweep": [], "GFA": [], "Incorporation of Pre-trade feed": [], "Lit Sweep": [], "Marketable order lock": [], "IOC": [], "Dark Lit Sweep": [], "Near-touch Peg": [], "Dark, PAB, Lit Sweep": [], "Dark on Expiry": [], "Far Touch Peg": []}}}, "Product Consultation / Feedback": {"LIS Dark Book": {}, "Quant Client Engagement": {}}, "SI Technology Hosting": {"Medium Room": {}, "Small Room": {}}, "Sponsored Access": {"Direct Sponsored Access": {}, "Sponsored Client": {}, "Sponsored DMA": {}}, "Trading Participant Connectivity": {"Logical Ports": {"FIX": {}, "BOE": {}, "Dedicated Cores": {}, "Drop": {}, "GRP/SPIN": {}, "Purge": {}}, "Physical Ports": {"None": {}, "Equinix LD3": {"None": [], "1Gb and below": [], "10Gb": [], "Internet Feed": [], "AWS Global Cloud Access": []}, "Equinix LD4": {"None": [], "1Gb and below": [], "10Gb": [], "Internet Feed": [], "AWS Global Cloud Access": []}, "Interxion": {"None": [], "1Gb and below": [], "10Gb": [], "Internet Feed": [], "AWS Global Cloud Access": []}}, "Timestamping Service": {"Missed Liquidity Report": {}, "Cancels Report": {}}}, "Non-Trading Participant Connectivity": {"Logical Ports": {"FIX": {}, "BOE": {}, "Dedicated Cores": {}, "Drop": {}, "GRP/SPIN": {}, "Purge": {}}, "Physical Ports": {"None": {}, "Equinix LD3": {"None": [], "1Gb and below": [], "10Gb": [], "Internet Feed": [], "AWS Global Cloud Access": []}, "Equinix LD4": {"None": [], "1Gb and below": [], "10Gb": [], "Internet Feed": [], "AWS Global Cloud Access": []}, "Interxion": {"None": [], "1Gb and below": [], "10Gb": [], "Internet Feed": [], "AWS Global Cloud Access": []}}}, "Lit Book \u2013 Post-Only Order Type": {}}, "Equities NA": {"CAD: Cboe BIDS Canada": {"Buyside": {}, "Conditionals": {"WTT Active": {}, "WTT Passive": {}}, "Sponsoring Broker": {}}, "CAD: MATCHNow": {}, "CAD: Neo": {"NEO-D": {}, "NEO-L": {}, "NEO-N": {}}, "CMC": {}, "Connectivity": {}, "Early Market Hours": {}, "Membership": {}, "Periodic Auction": {}, "Product Consultation / Feedback": {"LIS Dark Book": {}, "Quant Client Engagement": {}}, "QDP": {}, "Retail_Priority": {}, "Sponsored Access": {"Direct Sponsored Access": {}, "Sponsored Client": {}, "Sponsored DMA": {}}, "Dedicated Cores": {}, "RPI": {"Retail Remover": {}, "RPI Adder": {}}, "Corporate IPO": {}, "Timestamping Service": {}, "EDGA Maker/Taker": {}, "EDGX RPI": {}, "BOEv3": {}}, "FX": {"Cboe FX Replay": {}, "Full Amount": {}, "Fx Central": {}, "FX Point": {}, "FX Prints Market Data": {}, "FX Snap Market Data": {}, "Hidden_pegs": {"Match at Mid": {}}, "Historical Market Data": {}, "jump_basis_feed": {}, "Metals": {}, "SEF": {}, "Slippage Precision Order": {}, "Spot": {}, "Swaps": {}, "UST": {}, "XTX Algo": {}, "Internal Match": {}, "Real Time Market Data": {}, "Split Itch": {}, "Cboe Mid": {}}, "Listings": {"ETPs": {"AU - ETP": {"ETF": {"New Launch": [], "Transfer": []}, "CEF": {"New Launch": [], "Transfer": []}, "Depository Receipt": {"New Launch": [], "Transfer": []}, "Warrant": {"New Launch": [], "Transfer": []}, "Structured Product": {"New Launch": [], "Transfer": []}, "Other": {"New Launch": [], "Transfer": []}}, "CA - ETP": {"ETF": {"New Launch": [], "Transfer": []}, "CEF": {"New Launch": [], "Transfer": []}, "Depository Receipt": {"New Launch": [], "Transfer": []}, "Warrant": {"New Launch": [], "Transfer": []}, "Structured Product": {"New Launch": [], "Transfer": []}, "Other": {"New Launch": [], "Transfer": []}}, "EU - ETP": {"ETF": {"New Launch": [], "Transfer": []}, "CEF": {"New Launch": [], "Transfer": []}, "Depository Receipt": {"New Launch": [], "Transfer": []}, "Warrant": {"New Launch": [], "Transfer": []}, "Structured Product": {"New Launch": [], "Transfer": []}, "Other": {"New Launch": [], "Transfer": []}}, "UK - ETP": {"ETF": {"New Launch": [], "Transfer": []}, "CEF": {"New Launch": [], "Transfer": []}, "Depository Receipt": {"New Launch": [], "Transfer": []}, "Warrant": {"New Launch": [], "Transfer": []}, "Structured Product": {"New Launch": [], "Transfer": []}, "Other": {"New Launch": [], "Transfer": []}}, "US - ETP": {"ETF": {"New Launch": [], "Transfer": []}, "CEF": {"New Launch": [], "Transfer": []}, "Depository Receipt": {"New Launch": [], "Transfer": []}, "Warrant": {"New Launch": [], "Transfer": []}, "Structured Product": {"New Launch": [], "Transfer": []}, "Other": {"New Launch": [], "Transfer": []}}}, "Corporates": {"AU - Corporate": {"IPO": {}, "RTO": {}, "Direct Listing": {}, "Supplemental Listing": {"Warrant": [], "Convertible Debenture": [], "Non-Convertible Debenture": [], "Equity Private Placement": []}, "Transfer": {}, "Intralisting": {}}, "CA - Corporate": {"IPO": {}, "RTO": {}, "Direct Listing": {}, "Supplemental Listing": {"Warrant": [], "Convertible Debenture": [], "Non-Convertible Debenture": [], "Equity Private Placement": []}, "Transfer": {}, "Intralisting": {}}, "EU - Corporate": {"IPO": {}, "RTO": {}, "Direct Listing": {}, "Supplemental Listing": {"Warrant": [], "Convertible Debenture": [], "Non-Convertible Debenture": [], "Equity Private Placement": []}, "Transfer": {}, "Intralisting": {}}, "UK - Corporate": {"IPO": {}, "RTO": {}, "Direct Listing": {}, "Supplemental Listing": {"Warrant": [], "Convertible Debenture": [], "Non-Convertible Debenture": [], "Equity Private Placement": []}, "Transfer": {}, "Intralisting": {}}, "US - Corporate": {"IPO": {}, "RTO": {}, "Direct Listing": {}, "Supplemental Listing": {"Warrant": [], "Convertible Debenture": [], "Non-Convertible Debenture": [], "Equity Private Placement": []}, "Transfer": {}, "Intralisting": {}}}, "Private Markets": {"CA - Private Market": {"PTF (OM Fund)": {}, "PTF (Mutual Fund)": {}, "PTV": {}, "PTC": {}, "Other": {"New Launch": [], "Transfer": []}}}}, "Options Institute": {"Consulting": {"Consulting": {"Education Consulting": {}, "Exchange Consulting": {}}}, "Education": {"Bespoke Programming": {"Bespoke - In-Person": {}, "Bespoke - Online": {}}, "Certification Program": {"Certification": {}}, "Education Sponsorship": {"Tour": {"Basic": [], "Custom": [], "Education": [], "Premium": [], "Premium+": []}, "Research Grant": {}, "Virtual Office": {}, "Webinar": {}}, "Tour": {"Tour - Basic": {}, "Tour - Education": {}, "Tour - Premium": {}, "Tour - Premium+": {}}}, "Gen Next Programming": {"Gen Next Programming": {"Gen Next Programming": {}}}, "Market Content": {"Product Materials": {"Marketing Materials": {}, "Sales Materials": {}}}, "RMC": {"Sponsorship - RMC Conversation": {"2023": {}, "2024": {}}, "Sponsorship - RMC Mainstage": {"2020": {}, "2022": {}, "2023": {}, "2024": {}}, "Tickets": {}}}, "Cboe Clear": {"Derivatives Clearing": {"Broker Auction": {}, "Interop": {}, "New CP": {}, "New Service": {}, "New TP": {}, "New Venue": {}, "Preferred": {}}, "Equities Clearing": {"Broker Auction": {}, "Interop": {}, "Interop + Pref": {}, "New CP": {}, "New Service": {}, "New TP": {}, "New Venue": {}, "Preferred": {}}, "ETF Clearing": {"Broker Auction": {}, "Interop": {}, "New CP": {}, "New Service": {}, "New TP": {}, "New Venue": {}, "Preferred": {}}, "SFT": {"Agent Lender": {}, "Agent Lender + Borrower": {}, "Borrower": {}, "Principal Lender": {}, "Principal Lender + Borrower": {}, "Special Participant": {}, "Vendor": {"1 Year": {"ETPs": [], "Structured Products": [], "White Label": []}, "24 x 5": {}, "3 Year": {"ETPs": [], "Structured Products": [], "White Label": []}, "5 Year": {"ETPs": [], "Structured Products": [], "White Label": []}}}, "Post Trade Services": {}}, "Digital": {"FCM": {}, "DCM": {}, "Bank": {}, "Miscellaneous": {}}, "Data Vantage - RMA": {"Cboe Hanweck": {"Global Analytics": {}, "Hanweck Historical Data": {"Market Data": {}, "Vols+Greeks": {}, "Other": {"New Launch": [], "Transfer": []}}, "Options Analytics": {"Market Data": {}, "Scenarios": {}, "Vols+Greeks": {}, "FLEX": {}, "Other": {"New Launch": [], "Transfer": []}}, "OVS": {}, "Portfolio & Margin Analytics": {"SPAN": {}, "STANS": {}, "TIMS": {}}, "Trading Indicators": {"BII": {}, "Implied Divs": {}, "Interest Rates": {}, "IVR": {}, "Specific Vol": {}}}, "Cboe LiveVol": {"LiveVol API & Feeds": {"Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "Standard (thru DataShop)": {"Open Close": [], "Equity Short": [], "CFE Trades": []}}, "LiveVol Historical Data": {"Historical Data": {"Open Close": [], "Equity Short": [], "CFE Trades": [], "BZX Exchange Files": []}, "Nightly Updates": {"Open Close": [], "Equity Short": [], "CFE Trades": [], "BZX Exchange Files": []}}, "LiveVol Platforms": {"Core": {}, "Pro": {}}, "Streaming Trade Review": {}}, "Cboe Silexx": {"Cboe Silexx": {"API": {}, "CAT": {}, "Cboe FLEX": {}, "Crossing": {}, "Drop Copies": {}, "FIX In & Drop": {}, "Listed Options": {"Legacy Migration": [], "Cboe Silexx Only": []}, "Port Fee": {}, "FIX Out & Drop": {}, "Terminal": {}, "Connectivity": {}}}, "Datashop": {}, "FT Options": {"Custom Solution": {"Custom Solution": {}}, "FT Options API & Feeds": {"Excel RTD": {}, "Rest API": {}}, "FT Options Platforms": {"AMM": {}, "Mosaic": {}, "RiskEdge": {}, "VolEdge": {}}}, "Trade Alert": {"Trade Alert API & Feeds": {}, "Trade Alert Historical Data": {"Historical Data": {"Open Close": [], "Equity Short": [], "CFE Trades": [], "BZX Exchange Files": []}}, "Trade Alert Platforms": {"Option Alert": {}, "WhatsTrading Scanner": {}}}, "Cboe News Feed": {}}, "Data Vantage - MDAS": {"Cboe Global Cloud": {"BZX Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "Cboe One Premium": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "Cboe One Summary": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "CFE Top": {"AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}}, "EDGX Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "Europe Last Sale(s)": {}, "Europe Top(s)": {}}, "EU Market Data": {"Audit / back bill": {}, "Delayed Data": {"APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}, "Derived Data": {"CFDs": {}, "Indices": {}, "Other Financial": {}, "Spread Betting": {}}, "Direct Data Display": {"APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}, "Distribution License": {"Non - Professional L1": {}, "Non - Professional L2": {}, "Professional L1": {}, "Professional L2": {}, "APA": {}, "Last Sale": {}}, "Historical Data": {"Historical Data": {"Open Close": [], "Equity Short": [], "CFE Trades": [], "BZX Exchange Files": []}, "Market Data": {}, "Nightly Updates": {"Open Close": [], "Equity Short": [], "CFE Trades": [], "BZX Exchange Files": []}, "Vols+Greeks": {}, "Cboe Europe One": {}, "Other": {"New Launch": [], "Transfer": []}}, "Index Interest": {}, "Non Display": {"APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}, "Vendor Data Display": {}, "White Label Licence": {}}, "Market Data AU": {"Digital Media": {}, "Enterprise": {"Small Retail Broker Program": {}, "Non-Pro Enterprise (NPEP)": {}, "Non-Pro Enterprise Limited Security (NPEPLS)": {}, "Professional/Retail Professional (PEP)": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "External Distribution": {"Sub-vendor Firm License": {}, "SV Firm License - Level 1": {}, "SV Firm License - EMS/OMS": {}, "Delayed Data License": {}}, "External Distribution - Cboe Listed": {"Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Real-Time Data": {"Webfeed": [], "None": []}, "Delayed Data": {"Webfeed": []}}, "Financial Product License": {"Indices": {}}, "Historical": {}, "Internal Distribution": {"Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Real-Time Data": {"Webfeed": [], "None": []}, "Alpha": {"Delayed Data": ["Direct", "Indirect"], "Real-Time Data": ["Direct", "Indirect"]}, "Select": {"Delayed Data": ["Direct", "Indirect"], "Real-Time Data": ["Direct", "Indirect"]}, "Delayed Data": {"Webfeed": []}, "APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}, "Internal Distribution - Cboe Listed": {"Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Real-Time Data": {"Webfeed": [], "None": []}, "Delayed Data": {"Webfeed": []}}, "Non-Display (Non-Rev Generating)": {}, "Non-Display (Rev Generating)": {}, "Public Display": {}, "Web Hosting": {}}, "Market Data JP": {"External Distribution": {"Sub-vendor Firm License": {}, "SV Firm License - Level 1": {}, "SV Firm License - EMS/OMS": {}, "Delayed Data License": {}}, "Internal Distribution": {"Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Real-Time Data": {"Webfeed": [], "None": []}, "Alpha": {"Delayed Data": ["Direct", "Indirect"], "Real-Time Data": ["Direct", "Indirect"]}, "Select": {"Delayed Data": ["Direct", "Indirect"], "Real-Time Data": ["Direct", "Indirect"]}, "Delayed Data": {"Webfeed": []}, "APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}}, "US Market Data": {"BYX Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BYX Summary Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BYX Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BZX Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BZX Options COB": {"External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}}, "BZX Options Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BZX Options Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BZX Summary Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "BZX Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "C2 Cboe": {"Recipient Fee": {}}, "C2 Feed": {"Recipient Fee": {}}, "Cboe COB": {"Recipient Fee": {}}, "Cboe Connect": {}, "Cboe One Options": {"Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}}, "Cboe One Premium": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "Cboe One Summary": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "Cboe Options Feed (C1)": {}, "Cboe Options Lite": {}, "CFE Book Depth": {"Bulk Data Feed": {}, "Bulk Data Feed Enterprise": {}, "Direct Data Access Fee": {}, "Enterprise (Non-Pro)": {}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "News Service": {}, "Recipient Fee": {}, "Service Facilitator": {}, "TV Display": {}}, "CFE Feed": {"iBoxx": {}, "Test 1": {}, "VIX Futures": {}}, "CFE Surface Quote": {"Bulk Data Feed": {}, "Bulk Data Feed Enterprise": {}, "Direct Data Access Fee": {}, "Enterprise (Non-Pro)": {}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "News Service": {}, "Recipient Fee": {}, "Service Facilitator": {}, "TV Display": {}}, "EDGA Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGA Summary Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGA Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGX Attributed": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGX Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGX Options": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGX Summary Depth": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "EDGX Top": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "ETF Implied Liquidity Feed": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "Historical": {}, "Multiple Exchanges \u2013 Depth": {"Display": {}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}}, "Market Data CA": {"Cboe One Canada": {}, "Connectivity Billing Logical": {}, "Connectivity Billing Physical": {}, "Data Feed Fee Access Licensing": {}, "Direct Data Display": {"APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}, "Direct NITCH Data Access Licensing": {}, "Direct PITCH Data Access Licensing": {}, "External Distribution": {"Sub-vendor Firm License": {}, "SV Firm License - Level 1": {}, "SV Firm License - EMS/OMS": {}, "Delayed Data License": {}}, "Historical": {}, "Internal Distribution": {"Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Real-Time Data": {"Webfeed": [], "None": []}, "Alpha": {"Delayed Data": ["Direct", "Indirect"], "Real-Time Data": ["Direct", "Indirect"]}, "Select": {"Delayed Data": ["Direct", "Indirect"], "Real-Time Data": ["Direct", "Indirect"]}, "Delayed Data": {"Webfeed": []}, "APA": {}, "Last Sale": {}, "Level 1": {}, "Level 2": {}}, "MatchNow Access Feed": {}, "Non-Display (Non-Rev Generating)": {}, "Non-Display (Rev Generating)": {}, "Non Real-Time Distribution Licensing": {}}}, "Data Vantage - CGI": {"CGIF": {"CGIF": {"Digital Media": {}, "Enterprise": {"Open Close": [], "Equity Short": [], "CFE Trades": []}, "External Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Financial Product API Program": {}, "Financial Product White Label Program": {}, "Historical (one-off)": {"Tick History": []}, "Historical (subscription)": {"Webfeed": [], "Tick History": [], "Market Share Report": [], "Broker Share Report": [], "Daily Trade Summary": [], "Monthly Trade Summary": [], "Public Datafeed Files": [], "Reference Data": []}, "Internal Distribution": {"4AM Trading NO": [], "4AM Trading YES": []}, "Non-Display ATS": {}, "Small Retail Broker Program": {}, "AWS PrivateLink": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "VPN": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Internet Gateway": {"Virginia - US East 1": [], "London \u2013 EU West 2": [], "Hong Kong \u2013 AP East 1": []}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "CGIF Royalty": {}, "Main License (S&P Rev Share)": {"Language Learning Model (AI)": {}, "Retail Enterprise Entity Fee (MAIN)": {}, "Institutional Enterprise Entity Fee (MAIN)": {}, "Delayed User Fee Cap (MAIN)": {}}, "Morningstar License (Morningstar Rev Share)": {}, "Standard Channel License (Non-Rev Share)": {"Cboe Channel License (Non-Rev Share)": {}}}, "Index": {"Benchmark": {"Revenue Share": {}, "Non-Revenue Share": {}}, "Calculation": {"iNAV/IPOV/IIV": {}, "Custom Calc non-IP": {}, "Custom Calc IP": {}, "Distribution Only": {}}, "EU Indices": {"A&B Full": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "A&B Light": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Benchmark": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Derivatives": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Media": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Vendor": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Non-Display": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"], "3 Year": ["ETPs", "Structured Products", "White Label", "None"], "5 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Exempt Index Users": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Blended Benchmarks": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Factset Classification (Full European)": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Factset Classification (Full UK)": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}, "Factset Classifications (Level 1 UK)": {"1 Year": ["ETPs", "Structured Products", "White Label", "None"]}}, "IP": {"License (bp)": {}, "License (Flat Fee)": {}, "Rev Share": {}}, "Pricing": {"Standard Pricing Service": {}, "TOPS": {}}}, "TOPS": {}}};
 var ALL_STATS = {"Global Derivatives": {"families": 8, "subset1": 43, "subset2": 24, "subset3": 3, "subset4": 0, "paths": 66}, "Equities AU": {"families": 13, "subset1": 42, "subset2": 26, "subset3": 9, "subset4": 0, "paths": 115}, "Equities EU": {"families": 17, "subset1": 48, "subset2": 45, "subset3": 39, "subset4": 3, "paths": 359}, "Equities NA": {"families": 19, "subset1": 13, "subset2": 2, "subset3": 0, "subset4": 0, "paths": 28}, "FX": {"families": 20, "subset1": 1, "subset2": 0, "subset3": 0, "subset4": 0, "paths": 20}, "Listings": {"families": 3, "subset1": 11, "subset2": 16, "subset3": 6, "subset4": 0, "paths": 111}, "Options Institute": {"families": 5, "subset1": 10, "subset2": 20, "subset3": 5, "subset4": 0, "paths": 27}, "Cboe Clear": {"families": 5, "subset1": 15, "subset2": 4, "subset3": 3, "subset4": 0, "paths": 39}, "Digital": {"families": 4, "subset1": 0, "subset2": 0, "subset3": 0, "subset4": 0, "paths": 4}, "Data Vantage - RMA": {"families": 7, "subset1": 17, "subset2": 39, "subset3": 8, "subset4": 0, "paths": 65}, "Data Vantage - MDAS": {"families": 6, "subset1": 64, "subset2": 55, "subset3": 25, "subset4": 6, "paths": 1079}, "Data Vantage - CGI": {"families": 3, "subset1": 10, "subset2": 41, "subset3": 19, "subset4": 4, "paths": 133}};
 var BL_ORDER = ["Global Derivatives", "Equities AU", "Equities EU", "Equities NA", "FX", "Listings", "Options Institute", "Cboe Clear", "Digital", "Data Vantage - RMA", "Data Vantage - MDAS", "Data Vantage - CGI"];
 var currentBL = BL_ORDER[0];
 var levelNames = ['Business Line', 'Product Family', 'Subset 1', 'Subset 2', 'Subset 3', 'Subset 4'];
 
+// ===== Utility Functions =====
+function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
+
+function getNodeByPath(path) {
+  var node = ALL_DATA;
+  for (var i = 0; i < path.length; i++) {
+    if (typeof node === 'object' && node !== null) {
+      node = Array.isArray(node) ? node[path[i]] : node[path[i]];
+    } else return undefined;
+  }
+  return node;
+}
+
+function getParentByPath(path) {
+  if (path.length === 0) return null;
+  return getNodeByPath(path.slice(0, -1));
+}
+
+function escapeXml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+
+function computeStats(blName) {
+  var data = ALL_DATA[blName];
+  if (!data) return {families:0, subset1:0, subset2:0, subset3:0, subset4:0, paths:0};
+  var s = {families:0, subset1:0, subset2:0, subset3:0, subset4:0, paths:0};
+  function countLevel(node, level) {
+    if (node === null || node === undefined) { s.paths++; return; }
+    if (Array.isArray(node)) {
+      if (node.length === 0) { s.paths++; return; }
+      node.forEach(function() { s.paths++; });
+      return;
+    }
+    if (typeof node === 'object') {
+      var keys = Object.keys(node);
+      if (keys.length === 0) { s.paths++; return; }
+      if (level === 1) s.families += keys.length;
+      else if (level === 2) s.subset1 += keys.length;
+      else if (level === 3) s.subset2 += keys.length;
+      else if (level === 4) s.subset3 += keys.length;
+      else if (level === 5) s.subset4 += keys.length;
+      keys.forEach(function(k) { countLevel(node[k], level + 1); });
+    }
+  }
+  countLevel(data, 1);
+  return s;
+}
+
+function findAllOccurrences(valueName, targetLevel) {
+  var results = [];
+  function walk(node, level, path) {
+    if (!node || typeof node !== 'object' || Array.isArray(node)) return;
+    Object.keys(node).forEach(function(key) {
+      var currentPath = path.concat([key]);
+      if (level === targetLevel && key === valueName) {
+        results.push(currentPath);
+      }
+      walk(node[key], level + 1, currentPath);
+    });
+  }
+  BL_ORDER.forEach(function(bl) {
+    walk(ALL_DATA[bl], 1, [bl]);
+  });
+  return results;
+}
+
+function pushUndo() {
+  undoStack.push({data: JSON.stringify(ALL_DATA), order: JSON.stringify(BL_ORDER)});
+  if (undoStack.length > UNDO_CAP) undoStack.shift();
+}
+
+function refreshAll() {
+  ALL_STATS = {};
+  BL_ORDER.forEach(function(bl) { ALL_STATS[bl] = computeStats(bl); });
+  buildTabs();
+  updateStats();
+  renderTree();
+  updateChangeSummary();
+}
+
+function updateChangeSummary() {
+  if (!EDIT_MODE || !ORIGINAL_DATA) { document.getElementById('changeSummary').classList.remove('visible'); return; }
+  var orig = JSON.stringify(ORIGINAL_DATA) + JSON.stringify(ORIGINAL_BL_ORDER);
+  var curr = JSON.stringify(ALL_DATA) + JSON.stringify(BL_ORDER);
+  if (orig === curr) {
+    document.getElementById('changeSummary').classList.remove('visible');
+    changeCount = {adds:0, removes:0, renames:0, moves:0};
+    return;
+  }
+  document.getElementById('changeSummary').classList.add('visible');
+  var parts = [];
+  if (changeCount.adds > 0) parts.push('<strong>' + changeCount.adds + '</strong> add' + (changeCount.adds > 1 ? 's' : ''));
+  if (changeCount.removes > 0) parts.push('<strong>' + changeCount.removes + '</strong> remove' + (changeCount.removes > 1 ? 's' : ''));
+  if (changeCount.renames > 0) parts.push('<strong>' + changeCount.renames + '</strong> rename' + (changeCount.renames > 1 ? 's' : ''));
+  if (changeCount.moves > 0) parts.push('<strong>' + changeCount.moves + '</strong> move' + (changeCount.moves > 1 ? 's' : ''));
+  if (parts.length === 0) parts.push('Changes detected');
+  document.getElementById('changesText').innerHTML = parts.join(', ') + ' since edit mode started. ' + undoStack.length + ' undo step' + (undoStack.length !== 1 ? 's' : '') + ' available.';
+}
+
+// ===== Edit Mode =====
+function toggleEditMode() {
+  EDIT_MODE = !EDIT_MODE;
+  document.body.classList.toggle('edit-mode', EDIT_MODE);
+  document.getElementById('editToggle').classList.toggle('active', EDIT_MODE);
+  document.getElementById('editToggle').textContent = EDIT_MODE ? 'Exit Edit Mode' : 'Edit Mode';
+  if (EDIT_MODE) {
+    ORIGINAL_DATA = deepClone(ALL_DATA);
+    ORIGINAL_BL_ORDER = deepClone(BL_ORDER);
+    undoStack = [];
+    changeCount = {adds:0, removes:0, renames:0, moves:0};
+  } else {
+    cancelMove();
+    document.getElementById('changeSummary').classList.remove('visible');
+  }
+  refreshAll();
+}
+
+function undoLast() {
+  if (undoStack.length === 0) return;
+  var state = undoStack.pop();
+  ALL_DATA = JSON.parse(state.data);
+  BL_ORDER = JSON.parse(state.order);
+  if (!BL_ORDER.includes(currentBL)) currentBL = BL_ORDER[0];
+  changeCount.adds = Math.max(0, changeCount.adds - 1);
+  refreshAll();
+}
+
+function resetAll() {
+  if (!ORIGINAL_DATA) return;
+  if (!confirm('Reset all changes? This cannot be undone.')) return;
+  ALL_DATA = deepClone(ORIGINAL_DATA);
+  BL_ORDER = deepClone(ORIGINAL_BL_ORDER);
+  undoStack = [];
+  changeCount = {adds:0, removes:0, renames:0, moves:0};
+  if (!BL_ORDER.includes(currentBL)) currentBL = BL_ORDER[0];
+  refreshAll();
+}
+
+// ===== Add Child =====
+function addChild(pathStr, evt) {
+  var path = JSON.parse(pathStr);
+  var node = getNodeByPath(path);
+  if (node === null || node === undefined) return;
+  var e = evt || window.event;
+  var row = e.target.closest('.node-row');
+  if (row.querySelector('.inline-input')) return;
+  var input = document.createElement('input');
+  input.className = 'inline-input';
+  input.placeholder = 'New value name...';
+  var actions = document.createElement('span');
+  actions.className = 'inline-input-actions';
+  actions.innerHTML = '<button class="confirm" onclick="confirmAdd(this)">Add</button><button class="cancel" onclick="cancelInline(this)">Cancel</button>';
+  input.dataset.path = pathStr;
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') confirmAdd(input);
+    if (e.key === 'Escape') cancelInline(input);
+  });
+  row.appendChild(input);
+  row.appendChild(actions);
+  input.focus();
+}
+
+function confirmAdd(el) {
+  var row = el.closest('.node-row');
+  var input = row.querySelector('.inline-input');
+  var name = input.value.trim();
+  if (!name) { cancelInline(el); return; }
+  var path = JSON.parse(input.dataset.path);
+  var node = getNodeByPath(path);
+  if (Array.isArray(node)) {
+    if (node.includes(name)) { alert('Duplicate value: "' + name + '"'); return; }
+    pushUndo();
+    node.push(name);
+  } else if (typeof node === 'object' && node !== null) {
+    if (node.hasOwnProperty(name)) { alert('Duplicate value: "' + name + '"'); return; }
+    pushUndo();
+    node[name] = {};
+  }
+  changeCount.adds++;
+  refreshAll();
+}
+
+function cancelInline(el) {
+  var row = el.closest('.node-row');
+  var input = row.querySelector('.inline-input');
+  var actions = row.querySelector('.inline-input-actions');
+  if (input) input.remove();
+  if (actions) actions.remove();
+}
+
+// ===== Remove =====
+function removeNode(pathStr, name) {
+  var path = JSON.parse(pathStr);
+  var parent = getNodeByPath(path);
+  if (!parent) return;
+  var child = parent[name];
+  var childDesc = '';
+  if (child && typeof child === 'object' && !Array.isArray(child)) {
+    var cnt = Object.keys(child).length;
+    if (cnt > 0) childDesc = ' and its ' + cnt + ' child value' + (cnt > 1 ? 's' : '');
+  }
+  if (!confirm('Remove "' + name + '"' + childDesc + '?')) return;
+  pushUndo();
+  if (Array.isArray(parent)) {
+    var idx = parent.indexOf(name);
+    if (idx > -1) parent.splice(idx, 1);
+  } else {
+    delete parent[name];
+  }
+  changeCount.removes++;
+  refreshAll();
+}
+
+// ===== Rename =====
+function renameNode(pathStr, oldName, level, evt) {
+  var path = JSON.parse(pathStr);
+  var e = evt || window.event;
+  var row = e.target.closest('.node-row');
+  if (row.querySelector('.inline-input')) return;
+  var labelEl = row.querySelector('.node-label');
+  labelEl.style.display = 'none';
+  var input = document.createElement('input');
+  input.className = 'inline-input';
+  input.value = oldName;
+  input.dataset.path = pathStr;
+  input.dataset.oldName = oldName;
+  input.dataset.level = level;
+  var actions = document.createElement('span');
+  actions.className = 'inline-input-actions';
+  actions.innerHTML = '<button class="confirm" onclick="confirmRename(this)">Rename</button><button class="cancel" onclick="cancelRename(this)">Cancel</button>';
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') confirmRename(input);
+    if (e.key === 'Escape') cancelRename(input);
+  });
+  row.insertBefore(input, labelEl.nextSibling);
+  row.insertBefore(actions, input.nextSibling);
+  input.focus();
+  input.select();
+}
+
+function confirmRename(el) {
+  var row = el.closest('.node-row');
+  var input = row.querySelector('.inline-input');
+  var newName = input.value.trim();
+  var oldName = input.dataset.oldName;
+  var level = parseInt(input.dataset.level);
+  var path = JSON.parse(input.dataset.path);
+  if (!newName || newName === oldName) { cancelRename(el); return; }
+  var parent = getNodeByPath(path);
+  if (!parent) { cancelRename(el); return; }
+  if (!Array.isArray(parent) && parent.hasOwnProperty(newName)) { alert('Value "' + newName + '" already exists at this level.'); return; }
+  // Check for shared values at same level
+  var occurrences = findAllOccurrences(oldName, level);
+  if (occurrences.length > 1) {
+    var choice = prompt('This value "' + oldName + '" appears under ' + occurrences.length + ' parents.\nType "all" to rename all, or "this" to rename only this one, or "cancel":', 'all');
+    if (!choice || choice.toLowerCase() === 'cancel') { cancelRename(el); return; }
+    if (choice.toLowerCase() === 'all') {
+      pushUndo();
+      occurrences.forEach(function(occ) {
+        var p = getNodeByPath(occ.slice(0, -1));
+        if (p && !Array.isArray(p) && p.hasOwnProperty(oldName)) {
+          var val = p[oldName];
+          delete p[oldName];
+          p[newName] = val;
+        }
+      });
+      changeCount.renames++;
+      refreshAll();
+      return;
+    }
+  }
+  pushUndo();
+  if (Array.isArray(parent)) {
+    var idx = parent.indexOf(oldName);
+    if (idx > -1) parent[idx] = newName;
+  } else {
+    var val = parent[oldName];
+    delete parent[oldName];
+    parent[newName] = val;
+  }
+  changeCount.renames++;
+  refreshAll();
+}
+
+function cancelRename(el) {
+  var row = el.closest('.node-row');
+  var input = row.querySelector('.inline-input');
+  var actions = row.querySelector('.inline-input-actions');
+  var labelEl = row.querySelector('.node-label');
+  if (labelEl) labelEl.style.display = '';
+  if (input) input.remove();
+  if (actions) actions.remove();
+}
+
+// ===== Move (cut-paste) =====
+function startMove(pathStr, name, level) {
+  cancelMove();
+  moveState = {sourcePath: JSON.parse(pathStr), sourceName: name, sourceLevel: level};
+  document.getElementById('moveBanner').classList.add('visible');
+  document.getElementById('moveBannerText').textContent = 'Select target parent for "' + name + '" (level ' + (levelNames[level] || level) + ')';
+  renderTree(); // re-render to show paste buttons
+}
+
+function cancelMove() {
+  moveState = null;
+  document.getElementById('moveBanner').classList.remove('visible');
+  if (EDIT_MODE) renderTree();
+}
+
+function executePaste(targetPathStr) {
+  if (!moveState) return;
+  var targetPath = JSON.parse(targetPathStr);
+  var sourceParent = getNodeByPath(moveState.sourcePath);
+  var targetNode = getNodeByPath(targetPath);
+  if (!sourceParent || !targetNode) { cancelMove(); return; }
+  var name = moveState.sourceName;
+  if (typeof targetNode === 'object' && !Array.isArray(targetNode) && targetNode.hasOwnProperty(name)) {
+    alert('Target already has a child named "' + name + '". Rename first.');
+    return;
+  }
+  pushUndo();
+  var subtree;
+  if (Array.isArray(sourceParent)) {
+    var idx = sourceParent.indexOf(name);
+    if (idx > -1) { subtree = name; sourceParent.splice(idx, 1); }
+  } else {
+    subtree = sourceParent[name];
+    delete sourceParent[name];
+  }
+  if (subtree !== undefined) {
+    if (Array.isArray(targetNode)) {
+      targetNode.push(typeof subtree === 'string' ? subtree : name);
+    } else {
+      targetNode[name] = subtree;
+    }
+  }
+  changeCount.moves++;
+  moveState = null;
+  document.getElementById('moveBanner').classList.remove('visible');
+  refreshAll();
+}
+
+// ===== Business Line Editing =====
+function addBusinessLine() {
+  var name = prompt('New Business Line name:');
+  if (!name || !name.trim()) return;
+  name = name.trim();
+  if (ALL_DATA.hasOwnProperty(name)) { alert('Business Line "' + name + '" already exists.'); return; }
+  pushUndo();
+  ALL_DATA[name] = {};
+  BL_ORDER.push(name);
+  changeCount.adds++;
+  currentBL = name;
+  refreshAll();
+}
+
+function renameBusinessLine(oldName) {
+  var newName = prompt('Rename Business Line "' + oldName + '" to:', oldName);
+  if (!newName || !newName.trim() || newName.trim() === oldName) return;
+  newName = newName.trim();
+  if (ALL_DATA.hasOwnProperty(newName)) { alert('Business Line "' + newName + '" already exists.'); return; }
+  pushUndo();
+  ALL_DATA[newName] = ALL_DATA[oldName];
+  delete ALL_DATA[oldName];
+  var idx = BL_ORDER.indexOf(oldName);
+  if (idx > -1) BL_ORDER[idx] = newName;
+  if (currentBL === oldName) currentBL = newName;
+  changeCount.renames++;
+  refreshAll();
+}
+
+function removeBusinessLine(name) {
+  var cnt = Object.keys(ALL_DATA[name] || {}).length;
+  if (!confirm('Remove Business Line "' + name + '"' + (cnt > 0 ? ' and all ' + cnt + ' product families?' : '?'))) return;
+  pushUndo();
+  delete ALL_DATA[name];
+  BL_ORDER = BL_ORDER.filter(function(bl) { return bl !== name; });
+  if (currentBL === name) currentBL = BL_ORDER[0] || '';
+  changeCount.removes++;
+  refreshAll();
+}
+
+// ===== Build Tabs (updated for edit mode) =====
 function buildTabs() {
   var tabsEl = document.getElementById('tabs');
   tabsEl.innerHTML = '';
   BL_ORDER.forEach(function(bl) {
     var tab = document.createElement('div');
     tab.className = 'tab' + (bl === currentBL ? ' active' : '');
-    tab.innerHTML = bl + '<span class="tab-count">' + ALL_STATS[bl].families + '</span>';
+    var statsObj = ALL_STATS[bl] || computeStats(bl);
+    tab.innerHTML = escapeXml(bl) + '<span class="tab-count">' + statsObj.families + '</span>';
+    var tabActions = document.createElement('span');
+    tabActions.className = 'tab-edit-actions';
+    var tabRenameBtn = document.createElement('button');
+    tabRenameBtn.className = 'tab-edit-btn';
+    tabRenameBtn.title = 'Rename';
+    tabRenameBtn.innerHTML = '&#9998;';
+    tabRenameBtn.addEventListener('click', (function(b) { return function(e) { e.stopPropagation(); renameBusinessLine(b); }; })(bl));
+    tabActions.appendChild(tabRenameBtn);
+    var tabRemoveBtn = document.createElement('button');
+    tabRemoveBtn.className = 'tab-edit-btn';
+    tabRemoveBtn.title = 'Remove';
+    tabRemoveBtn.innerHTML = '&#10005;';
+    tabRemoveBtn.addEventListener('click', (function(b) { return function(e) { e.stopPropagation(); removeBusinessLine(b); }; })(bl));
+    tabActions.appendChild(tabRemoveBtn);
+    tab.appendChild(tabActions);
     tab.addEventListener('click', function() { switchBL(bl); });
     tabsEl.appendChild(tab);
   });
+  if (EDIT_MODE) {
+    var addTab = document.createElement('button');
+    addTab.className = 'add-bl-tab';
+    addTab.textContent = '+ Add Business Line';
+    addTab.addEventListener('click', addBusinessLine);
+    tabsEl.appendChild(addTab);
+  }
 }
 
 function updateStats() {
@@ -240,7 +806,8 @@ function updateStats() {
   });
 }
 
-function buildNode(name, children, level) {
+function buildNode(name, children, level, path) {
+  path = path || [];
   var div = document.createElement('div');
   div.className = 'tree-node';
   var isObj = children && typeof children === 'object' && !Array.isArray(children);
@@ -248,6 +815,13 @@ function buildNode(name, children, level) {
   var hasChildren = (isObj && Object.keys(children).length > 0) || (isArr && children.length > 0);
   var row = document.createElement('div');
   row.className = 'node-row level-' + level;
+  row.dataset.path = JSON.stringify(path);
+  row.dataset.name = name;
+  row.dataset.level = level;
+  // Highlight move source
+  if (moveState && JSON.stringify(moveState.sourcePath) === JSON.stringify(path.slice(0, -1)) && moveState.sourceName === name) {
+    row.classList.add('move-source');
+  }
   var toggle = document.createElement('span');
   toggle.className = 'toggle' + (hasChildren ? '' : ' leaf');
   toggle.textContent = '\u25B6';
@@ -267,18 +841,78 @@ function buildNode(name, children, level) {
     childCount.textContent = '(' + cnt + ')';
     row.appendChild(childCount);
   }
+  // Edit action buttons
+  if (EDIT_MODE && level > 0) {
+    var ea = document.createElement('span');
+    ea.className = 'edit-actions';
+    var parentPathStr = JSON.stringify(path.slice(0, -1));
+    var nodePathStr = JSON.stringify(path);
+    var nodeName = name;
+    var nodeLevel = level;
+    var renameBtn = document.createElement('button');
+    renameBtn.className = 'edit-btn rename';
+    renameBtn.title = 'Rename';
+    renameBtn.innerHTML = '&#9998;';
+    renameBtn.addEventListener('click', (function(pp, nn, nl) { return function(e) { e.stopPropagation(); renameNode(pp, nn, nl, e); }; })(parentPathStr, nodeName, nodeLevel));
+    ea.appendChild(renameBtn);
+    if (hasChildren || isObj) {
+      var addBtn = document.createElement('button');
+      addBtn.className = 'edit-btn add';
+      addBtn.title = 'Add child';
+      addBtn.textContent = '+';
+      addBtn.addEventListener('click', (function(np) { return function(e) { e.stopPropagation(); addChild(np, e); }; })(nodePathStr));
+      ea.appendChild(addBtn);
+    }
+    var removeBtn = document.createElement('button');
+    removeBtn.className = 'edit-btn remove';
+    removeBtn.title = 'Remove';
+    removeBtn.innerHTML = '&#10005;';
+    removeBtn.addEventListener('click', (function(pp, nn) { return function(e) { e.stopPropagation(); removeNode(pp, nn); }; })(parentPathStr, nodeName));
+    ea.appendChild(removeBtn);
+    var moveBtn = document.createElement('button');
+    moveBtn.className = 'edit-btn move';
+    moveBtn.title = 'Move';
+    moveBtn.innerHTML = '&#8644;';
+    moveBtn.addEventListener('click', (function(pp, nn, nl) { return function(e) { e.stopPropagation(); startMove(pp, nn, nl); }; })(parentPathStr, nodeName, nodeLevel));
+    ea.appendChild(moveBtn);
+    row.appendChild(ea);
+  }
+  // Add child button for level 0 (business line root)
+  if (EDIT_MODE && level === 0 && isObj) {
+    var ea0 = document.createElement('span');
+    ea0.className = 'edit-actions';
+    var addBtn0 = document.createElement('button');
+    addBtn0.className = 'edit-btn add';
+    addBtn0.title = 'Add child';
+    addBtn0.textContent = '+';
+    addBtn0.addEventListener('click', (function(np) { return function(e) { e.stopPropagation(); addChild(np, e); }; })(JSON.stringify(path)));
+    ea0.appendChild(addBtn0);
+    row.appendChild(ea0);
+  }
+  // Move paste target
+  if (moveState && EDIT_MODE && level === moveState.sourceLevel - 1 && (isObj || hasChildren)) {
+    // Don't allow pasting into own parent
+    if (JSON.stringify(path) !== JSON.stringify(moveState.sourcePath)) {
+      var pasteBtn = document.createElement('button');
+      pasteBtn.className = 'edit-btn paste';
+      pasteBtn.textContent = 'Paste Here';
+      pasteBtn.addEventListener('click', function(e) { e.stopPropagation(); executePaste(JSON.stringify(path)); });
+      row.appendChild(pasteBtn);
+    }
+  }
   div.appendChild(row);
   if (hasChildren) {
     var childContainer = document.createElement('div');
     childContainer.className = 'children';
     childContainer.style.display = 'none';
     if (isArr) {
-      children.forEach(function(child) { childContainer.appendChild(buildNode(child, null, level + 1)); });
+      children.forEach(function(child, idx) { childContainer.appendChild(buildNode(child, null, level + 1, path.concat([child]))); });
     } else {
-      Object.keys(children).sort().forEach(function(key) { childContainer.appendChild(buildNode(key, children[key], level + 1)); });
+      Object.keys(children).sort().forEach(function(key) { childContainer.appendChild(buildNode(key, children[key], level + 1, path.concat([key]))); });
     }
     div.appendChild(childContainer);
-    row.addEventListener('click', function() {
+    row.addEventListener('click', function(e) {
+      if (e.target.closest('.edit-actions') || e.target.closest('.inline-input') || e.target.closest('.inline-input-actions') || e.target.closest('.edit-btn')) return;
       var isOpen = childContainer.style.display !== 'none';
       childContainer.style.display = isOpen ? 'none' : 'block';
       toggle.classList.toggle('expanded', !isOpen);
@@ -295,7 +929,7 @@ function renderTree() {
     container.innerHTML = '<div class="empty-state">No product families configured for this business line.</div>';
     return;
   }
-  var root = buildNode(currentBL, hierarchy, 0);
+  var root = buildNode(currentBL, hierarchy, 0, [currentBL]);
   container.appendChild(root);
   var firstChildren = root.querySelector('.children');
   if (firstChildren) {
@@ -348,6 +982,157 @@ function searchTree(query) {
   });
 }
 
+// ===== Export Metadata XML =====
+var FIELD_DEFS = [
+  {apiName: 'Business_Line__c', label: 'Business Line', controller: null},
+  {apiName: 'Product_Family__c', label: 'Product Family', controller: 'Business_Line__c'},
+  {apiName: 'Product_Subset_1__c', label: 'Product Subset 1', controller: 'Product_Family__c'},
+  {apiName: 'Product_Subset_2__c', label: 'Product Subset 2', controller: 'Product_Subset_1__c'},
+  {apiName: 'Product_Subset_3__c', label: 'Product Subset 3', controller: 'Product_Subset_2__c'},
+  {apiName: 'Product_Subset_4__c', label: 'Product Subset 4', controller: 'Product_Subset_3__c'}
+];
+
+function extractLevelData() {
+  // Returns an array of 6 objects: {values: Set, controllerMap: {valueName: Set<controllerValue>}}
+  var levels = [];
+  for (var i = 0; i < 6; i++) levels.push({values: new Set(), controllerMap: {}});
+  // Level 0: Business Lines
+  BL_ORDER.forEach(function(bl) { levels[0].values.add(bl); });
+
+  function walk(node, level, parentName) {
+    if (!node || level > 5) return;
+    if (Array.isArray(node)) {
+      node.forEach(function(val) {
+        levels[level].values.add(val);
+        if (!levels[level].controllerMap[val]) levels[level].controllerMap[val] = new Set();
+        levels[level].controllerMap[val].add(parentName);
+      });
+      return;
+    }
+    if (typeof node === 'object') {
+      Object.keys(node).forEach(function(key) {
+        levels[level].values.add(key);
+        if (parentName !== null) {
+          if (!levels[level].controllerMap[key]) levels[level].controllerMap[key] = new Set();
+          levels[level].controllerMap[key].add(parentName);
+        }
+        walk(node[key], level + 1, key);
+      });
+    }
+  }
+
+  BL_ORDER.forEach(function(bl) {
+    walk(ALL_DATA[bl], 1, bl);
+  });
+  return levels;
+}
+
+function generateFieldXml(fieldIdx, levelData) {
+  var fd = FIELD_DEFS[fieldIdx];
+  var ld = levelData[fieldIdx];
+  var values = Array.from(ld.values).sort();
+  var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">\n';
+  xml += '    <fullName>' + escapeXml(fd.apiName) + '</fullName>\n';
+  xml += '    <label>' + escapeXml(fd.label) + '</label>\n';
+  xml += '    <type>Picklist</type>\n';
+  xml += '    <valueSet>\n';
+  if (fd.controller) {
+    xml += '        <controllingField>' + escapeXml(fd.controller) + '</controllingField>\n';
+  }
+  xml += '        <restricted>true</restricted>\n';
+  xml += '        <valueSetDefinition>\n';
+  xml += '            <sorted>false</sorted>\n';
+  values.forEach(function(val) {
+    xml += '            <value>\n';
+    xml += '                <fullName>' + escapeXml(val) + '</fullName>\n';
+    xml += '                <default>false</default>\n';
+    xml += '                <label>' + escapeXml(val) + '</label>\n';
+    xml += '            </value>\n';
+  });
+  xml += '        </valueSetDefinition>\n';
+  // Value settings for dependent fields
+  if (fd.controller && Object.keys(ld.controllerMap).length > 0) {
+    var sortedValues = Object.keys(ld.controllerMap).sort();
+    sortedValues.forEach(function(val) {
+      var controllers = Array.from(ld.controllerMap[val]).sort();
+      xml += '        <valueSettings>\n';
+      controllers.forEach(function(cv) {
+        xml += '            <controllingFieldValue>' + escapeXml(cv) + '</controllingFieldValue>\n';
+      });
+      xml += '            <valueName>' + escapeXml(val) + '</valueName>\n';
+      xml += '        </valueSettings>\n';
+    });
+  }
+  xml += '    </valueSet>\n';
+  xml += '</CustomField>\n';
+  return xml;
+}
+
+function showExportModal() {
+  var levelData = extractLevelData();
+  var container = document.getElementById('exportFields');
+  container.innerHTML = '';
+  FIELD_DEFS.forEach(function(fd, idx) {
+    var ld = levelData[idx];
+    var valCount = ld.values.size;
+    if (valCount === 0 && idx > 0) return; // skip empty levels
+    var xml = generateFieldXml(idx, levelData);
+    var fileName = fd.apiName + '.field-meta.xml';
+    var div = document.createElement('div');
+    div.className = 'field-export';
+    div.innerHTML =
+      '<div class="field-header" onclick="this.nextElementSibling.classList.toggle(\'open\')">' +
+      '<span>' + escapeXml(fd.apiName) + ' (' + valCount + ' values)</span>' +
+      '<span style="font-size:11px;color:#9ca3af;">' + (fd.controller ? 'Dependent on ' + fd.controller : 'Controller') + '</span>' +
+      '</div>' +
+      '<div class="field-body">' +
+      '<pre id="xml-' + idx + '"></pre>' +
+      '<div class="btn-row">' +
+      '<button onclick="copyXml(' + idx + ')">Copy to Clipboard</button>' +
+      '<button class="download-btn" onclick="downloadXml(' + idx + ',\'' + fileName + '\')">Download ' + fileName + '</button>' +
+      '</div></div>';
+    container.appendChild(div);
+    document.getElementById('xml-' + idx).textContent = xml;
+  });
+  document.getElementById('exportModal').classList.add('visible');
+}
+
+function closeExportModal() {
+  document.getElementById('exportModal').classList.remove('visible');
+}
+
+function copyXml(idx) {
+  var pre = document.getElementById('xml-' + idx);
+  navigator.clipboard.writeText(pre.textContent).then(function() {
+    alert('Copied to clipboard!');
+  });
+}
+
+function downloadXml(idx, fileName) {
+  var pre = document.getElementById('xml-' + idx);
+  var blob = new Blob([pre.textContent], {type: 'application/xml'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fileName;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// Close modal on overlay click
+document.getElementById('exportModal').addEventListener('click', function(e) {
+  if (e.target === this) closeExportModal();
+});
+
+// Keyboard shortcut: Escape to cancel move
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (moveState) cancelMove();
+    if (document.getElementById('exportModal').classList.contains('visible')) closeExportModal();
+  }
+});
+
+// Init
 buildTabs();
 updateStats();
 renderTree();
